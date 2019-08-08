@@ -7,6 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  offerTitles: any[] = [{
+    primaryTitle: "Deals",
+    secondaryTitle: "Of The Day"
+  },
+  {
+    primaryTitle: "Trending",
+    secondaryTitle: "Offers"
+  },
+  {
+    primaryTitle: "Recommended",
+    secondaryTitle: "For You"
+  }]
+
   constructor() { }
 
   ngOnInit() {

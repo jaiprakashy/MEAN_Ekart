@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <div class="row full-row">
+    <div class="col-md-12">
+      <h2><b>{{primaryTitle}}</b> {{secondaryTitle}}</h2>
+      <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" *ngFor="let offers of getOfferList(); let i = index" [attr.data-slide-to]="i" [ngClass]="i===0 ? 'active' : ''"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="item carousel-item" *ngFor="let offers of getOfferList(); let i = index" [ngClass]="i===0 ? 'active' : ''">
+            <div class="row">
+              <div class="col-sm-3" *ngFor="let offer of offers">
+                <app-offer [offer]="offer"></app-offer>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="#myCarousel" class="carousel-control left carousel-control-prev" data-slide="prev">
+          <i class="fa fa-angle-left"></i>
+        </a>
+        <a href="#myCarousel" class="carousel-control right carousel-control-next" data-slide="next">
+          <i class="fa fa-angle-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
