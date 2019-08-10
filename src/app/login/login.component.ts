@@ -1,12 +1,15 @@
+import { UserService } from './../shared/user.service';
 import { Component, OnInit } from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import {CustomValidators} from './helpers/custom.validators'
+import { User } from '../shared/user.model';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [UserService]
 })
 export class LoginComponent implements OnInit {
 
@@ -16,6 +19,7 @@ export class LoginComponent implements OnInit {
   registerForm: FormGroup;
   loginForm: FormGroup;
   submitted = false;
+  serverErrorMessages: string = "";
 
   showLoginForm() {
     this.pageTitle = "Login";
@@ -31,8 +35,6 @@ export class LoginComponent implements OnInit {
   get lf() {return this.loginForm.controls;}
 
   registerSubmit() {
-    console.log(this.registerForm);
-    
     this.submitted = true;
 
     // stop here if form is invalid
@@ -40,7 +42,30 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value))
+    let newUser: User = {
+      name: this.rf.name.value,
+      email: this.rf.email.value,
+      password: this.rf.password.value
+    }
+    this.userService.postUser(newUser).subscribe(
+      res => {
+        alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value))
+        this.resetRegisterSubmit()
+      },
+      err => {
+        if (err.status === 422 ) {
+          this.serverErrorMessages = err.error.join('</br>');
+        } else {
+          this.serverErrorMessages = "Something went wrong. Please contact admin."
+        }
+      }
+    )
+  }
+
+  resetRegisterSubmit() {
+    this.registerForm.reset();
+    this.submitted = false;
+    this.serverErrorMessages = "";
   }
 
   loginSubmit() {
@@ -56,7 +81,7 @@ export class LoginComponent implements OnInit {
     alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.loginForm.value))
   }
 
-  constructor(private formBuilder: FormBuilder, public activeModal: NgbActiveModal) { }
+  constructor(private formBuilder: FormBuilder, private userService: UserService, public activeModal: NgbActiveModal) { }
 
   ngOnInit() {
       this.registerForm = this.formBuilder.group({
@@ -66,7 +91,7 @@ export class LoginComponent implements OnInit {
                 hasNoSpecialCharacters: true
               }
             )]],
-          email: [null, [Validators.required, Validators.email]],
+          email: [null, [Validators.required, CustomValidators.patternValidator(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, {validEmail: true})]],
           password: [null, [Validators.required, Validators.minLength(6), 
             CustomValidators.patternValidator(/\d/, { hasNumber: true }),
             CustomValidators.patternValidator(/[A-Z]/, { hasUpperCase: true }),

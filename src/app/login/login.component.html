@@ -46,7 +46,7 @@
                   <input autocomplete="on" type="email" formControlName="email" class="form-control" placeholder="Email" [ngClass]="{ 'is-invalid': (submitted || !rf.email.untouched) && rf.email.errors }">
                   <div *ngIf="rf.email.errors" class="invalid-feedback">
                     <div *ngIf="rf.email.errors.required">Email is required</div>
-                    <div *ngIf="rf.email.errors.email">Email must be a valid email address</div>
+                    <div *ngIf="rf.email.errors.validEmail">Email must be a valid email address</div>
                 </div>
                 </div>
                 <div class="form-group col-md-6">
@@ -71,6 +71,9 @@
                         <div *ngIf="rf.confirmPassword.errors.NoPassswordMatch">Passwords do not match</div>
                     </div>
                 </div>
+              </div>
+              <div *ngIf="serverErrorMessages" class="text-danger">
+                {{serverErrorMessages}}
               </div>
               <div class="form-row form-group">
                 <button class="btn btn-primary col-md-12">Sign Up</button>
