@@ -2,9 +2,9 @@
   <div class="row full-row">
     <div class="col-md-12">
       <h2><b>{{primaryTitle}}</b> {{secondaryTitle}}</h2>
-      <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+      <div id="{{primaryTitle}}" class="carousel slide" data-ride="carousel" data-interval="0">
         <ol class="carousel-indicators">
-          <li data-target="#myCarousel" *ngFor="let offers of getOfferList(); let i = index" [attr.data-slide-to]="i" [ngClass]="i===0 ? 'active' : ''"></li>
+          <li [attr.data-target]="'#'+primaryTitle" *ngFor="let offers of getOfferList(); let i = index" [attr.data-slide-to]="i" [ngClass]="i===0 ? 'active' : ''"></li>
         </ol>
         <div class="carousel-inner">
           <div class="item carousel-item" *ngFor="let offers of getOfferList(); let i = index" [ngClass]="i===0 ? 'active' : ''">
@@ -15,10 +15,10 @@
             </div>
           </div>
         </div>
-        <a href="#myCarousel" class="carousel-control left carousel-control-prev" data-slide="prev">
+        <a href="#{{primaryTitle}}" class="carousel-control left carousel-control-prev" data-slide="prev">
           <i class="fa fa-angle-left"></i>
         </a>
-        <a href="#myCarousel" class="carousel-control right carousel-control-next" data-slide="next">
+        <a href="#{{primaryTitle}}" class="carousel-control right carousel-control-next" data-slide="next">
           <i class="fa fa-angle-right"></i>
         </a>
       </div>

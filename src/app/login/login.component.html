@@ -1,68 +1,65 @@
-<section class="testimonial py-5" id="testimonial">
-  <div class="container">
-    <div class="row ">
-      <div class="col-md-4 py-5 bg-primary text-white text-center ">
-        <div class=" ">
-          <div class="card-body">
-            <img src="http://www.ansonika.com/mavia/img/registration_bg.svg" style="width:30%">
-            <h2 class="py-3">Login</h2>
-            <p>Tation argumentum et usu, dicit viderer evertitur te has. Eu dictas concludaturque usu, facete detracto
-              patrioque an per, lucilius pertinacia eu vel.
-
-            </p>
+  <div role="document" class="modal-dialog">
+    <div class="modal-content">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 py-5 bg-primary text-white text-center">
+            <div class=" ">
+              <div class="card-body">
+                <img src="http://www.ansonika.com/mavia/img/registration_bg.svg" style="width:75%">
+                <h2 class="py-3">{{pageTitle}}</h2>
+                <p>{{pageDescription}}</p>
+              </div>
+            </div>
+          </div>
+          <div id="login" class="col-md-8 py-5 border" [style.display]="pageTitle==='Login'?'block':'none'">
+            <form>
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <input type="email" name="email" class="form-control" id="email" placeholder="Email"
+                    required="required">
+                </div>
+                <div class="form-group col-md-12">
+                  <input type="password" name="password" class="form-control" id="password" placeholder="Password"
+                    required="required">
+                </div>
+              </div>
+              <div class="form-row">
+                <button type="button" class="btn btn-primary col-md-12">Login</button>
+              </div>
+            </form>
+            <div class="row">
+              <button type="button" class="btn btn-link col-md-12" (click)="showSignupForm()">New to Meankart? Create an
+                account</button>
+            </div>
+          </div>
+          <div id="signup" class="col-md-8 py-5 border" [style.display]="pageTitle==='Sign Up'?'block':'none'">
+            <form>
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <input name="name" class="form-control" id="name" placeholder="Name" required="required">
+                </div>
+                <div class="form-group col-md-12">
+                  <input type="email" name="email" class="form-control" id="email" placeholder="Email"
+                    required="required">
+                </div>
+                <div class="form-group col-md-6">
+                  <input type="password" name="password" class="form-control" id="password" placeholder="Password"
+                    required="required">
+                </div>
+                <div class="form-group col-md-6">
+                  <input type="password" name="confirmPassword" class="form-control" id="confirmPassword"
+                    placeholder="Confirm Password" required="required">
+                </div>
+              </div>
+              <div class="form-row">
+                <button type="button" class="btn btn-primary col-md-12">Sign Up</button>
+              </div>
+            </form>
+            <div class="row">
+              <button type="button" class="btn btn-link col-md-12" (click)="showLoginForm()">Existing User? Log in</button>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-md-8 py-5 border">
-        <h4 class="pb-4">Please fill with your details</h4>
-        <form>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <input id="Full Name" name="Full Name" placeholder="Full Name" class="form-control" type="text">
-            </div>
-            <div class="form-group col-md-6">
-              <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <input id="Mobile No." name="Mobile No." placeholder="Mobile No." class="form-control" required="required"
-                type="text">
-            </div>
-            <div class="form-group col-md-6">
-
-              <select id="inputState" class="form-control">
-                <option selected>Choose ...</option>
-                <option> New Buyer</option>
-                <option> Auction</option>
-                <option> Complaint</option>
-                <option> Feedback</option>
-              </select>
-            </div>
-            <div class="form-group col-md-12">
-              <textarea id="comment" name="comment" cols="40" rows="5" class="form-control"></textarea>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <div class="form-group">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
-                  <label class="form-check-label" for="invalidCheck2">
-                    <small>By clicking Submit, you agree to our Terms & Conditions, Visitor Agreement and Privacy
-                      Policy.</small>
-                  </label>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <div class="form-row">
-            <button type="button" class="btn btn-danger">Submit</button>
-          </div>
-        </form>
-      </div>
     </div>
   </div>
-</section>
