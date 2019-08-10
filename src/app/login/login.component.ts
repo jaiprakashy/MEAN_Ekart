@@ -4,12 +4,12 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import {CustomValidators} from './helpers/custom.validators'
 import { User } from '../shared/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
-  providers: [UserService]
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
 
@@ -22,11 +22,14 @@ export class LoginComponent implements OnInit {
   serverErrorMessages: string = "";
 
   showLoginForm() {
+    this.resetRegisterSubmit();
     this.pageTitle = "Login";
     this.pageDescription = "Get access to your Orders, Wishlist and Recommendations";
   }
 
   showSignupForm() {
+    this.resetLoginSubmit();
+    
     this.pageTitle = "Sign Up";
     this.pageDescription = "We do not share your personal data with anyone";
   }
@@ -49,7 +52,7 @@ export class LoginComponent implements OnInit {
     }
     this.userService.postUser(newUser).subscribe(
       res => {
-        alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value))
+        console.log(res);
         this.resetRegisterSubmit()
       },
       err => {
@@ -78,12 +81,31 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.loginForm.value))
+    this.userService.login(this.loginForm.value).subscribe(
+      res => {
+        console.log(res);
+        this.userService.setToken(res['token']);
+        this.router.navigateByUrl('/user-profile');
+        this.resetLoginSubmit()
+      },
+      err => {
+        this.serverErrorMessages = err.error.message;
+      }
+    )
   }
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, public activeModal: NgbActiveModal) { }
+  resetLoginSubmit() {
+    this.loginForm.reset();
+    this.submitted = false;
+    this.serverErrorMessages = "";
+  }
+
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router, public activeModal: NgbActiveModal) { }
 
   ngOnInit() {
+      if (this.userService.isLoggedIn()) {
+        this.router.navigateByUrl('/user-profile');
+      }
       this.registerForm = this.formBuilder.group({
           name: [null, [Validators.required, CustomValidators.patternValidator(/^([^0-9]*)$/, { hasNoNumber: true }),
             CustomValidators.patternValidator(/^[_A-z0-9]*((-|\s)*[_A-z0-9])*$/,
@@ -108,8 +130,8 @@ export class LoginComponent implements OnInit {
         });
 
       this.loginForm = this.formBuilder.group({
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(6)]],
+        email: [null, [Validators.required, CustomValidators.patternValidator(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, {validEmail: true})]],
+        password: [null, [Validators.required, Validators.minLength(6)]],
     });
     }
 }
