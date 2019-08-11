@@ -16,6 +16,7 @@ import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './auth/auth.guard';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { LiveOffersComponent } from './live-offers/live-offers.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     OfferComponent,
     FooterComponent,
     LoginComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    LiveOffersComponent
   ],
   imports: [
     BrowserModule,
