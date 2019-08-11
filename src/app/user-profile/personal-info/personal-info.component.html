@@ -1,7 +1,7 @@
 <div class="container">
   <form [formGroup]="nameUpdateForm" (ngSubmit)="nameFormSubmit(nameUpdateForm)">
     <span class="title">Personal Information</span>
-    <span class="edit-link" (click)="toggleNameFormStatus(nameUpdateForm)">{{nameUpdateForm.enabled? 'Cancel' : 'Edit'}}</span>
+    <span class="edit-link text-primary" (click)="toggleNameFormStatus(nameUpdateForm)">{{nameUpdateForm.enabled? 'Cancel' : 'Edit'}}</span>
     <div class="form-row">
       <div class="form-group col-md-6">
         <input type="text" class="form-control" placeholder="Name" formControlName="name" 
@@ -15,30 +15,25 @@
       </div>
     </div>
   </form>
+
+  <form [formGroup]="emailUpdateForm" (ngSubmit)="emailFormSubmit(emailUpdateForm)">
+      <span class="title">Email Address</span>
+      <span class="edit-link text-primary" (click)="toggleEmailFormStatus(emailUpdateForm)">{{emailUpdateForm.enabled? 'Cancel' : 'Edit'}}</span>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <input type="email" class="form-control" placeholder="Email" formControlName="email" 
+          [ngClass]="{ 'is-invalid': (!euf.email.untouched) && euf.email.errors }">
+          <div *ngIf="euf.email.errors" class="invalid-feedback">
+              <div *ngIf="euf.email.errors.required">Email is required</div>
+              <div *ngIf="euf.email.errors.email">Email must be a valid email address</div>
+          </div>
+        </div>
+        <div class="form-group col-md-4">
+          <button type="submit" class="btn btn-primary" *ngIf="emailUpdateForm.enabled">Save</button>
+        </div>
+      </div>
+    </form>
+
+    <div class="text-danger" *ngIf="serverErrorMessages!==''">{{this.serverErrorMessages}}</div>
+    <div class="text-success" *ngIf="serverSuccessMessage!==''">{{this.serverSuccessMessage}}</div>
 </div>
-<!-- <div class="form-row">
-      <div class="form-group col-md-12">
-        <input autocomplete="on" type="email" formControlName="email" class="form-control" placeholder="Email"
-          [ngClass]="{ 'is-invalid': (submitted || !lf.email.untouched) && lf.email.errors }">
-        <div *ngIf="lf.email.errors" class="invalid-feedback">
-          <div *ngIf="lf.email.errors.required">Email is required</div>
-          <div *ngIf="lf.email.errors.validEmail">Email must be a valid email address</div>
-        </div>
-      </div>
-      <div class="form-group col-md-12">
-        <input autocomplete="on" type="password" formControlName="password" class="form-control" placeholder="Password"
-          [ngClass]="{ 'is-invalid': (submitted || !lf.password.untouched) && lf.password.errors }">
-        <div *ngIf="lf.password.errors" class="invalid-feedback">
-          <div *ngIf="lf.password.errors.required">Password is required</div>
-          <div *ngIf=lf.password.errors.minlength>Password must have atleast 6 characters</div>
-        </div>
-      </div>
-    </div>
-    <div *ngIf="serverErrorMessages" class="text-danger">
-      {{serverErrorMessages}}
-    </div>
-    <div class="form-row form-group">
-      <button type="submit" class="btn btn-primary col-md-12">Login</button>
-    </div>
-  </form>
-</div> -->

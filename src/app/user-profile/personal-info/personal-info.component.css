@@ -2,4 +2,14 @@
   font-size: 18px;
   font-weight: 500;
   padding-right: 24px;
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+.edit-link {
+  cursor: pointer;
+}
+
+form {
+  margin: 24px;
 }

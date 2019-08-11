@@ -30,7 +30,7 @@ export class UserProfileComponent implements OnInit {
     this.userService.getUserProfile().subscribe(
       res => {
         console.log(res['user']);
-        
+        this.userService.loggedInUsername = res['user'].name;
         this.userDetails = res['user'];
       },
       err => {}

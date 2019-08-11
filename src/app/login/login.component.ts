@@ -62,6 +62,7 @@ export class LoginComponent implements OnInit {
         } else {
           this.serverErrorMessages = "Something went wrong. Please contact admin."
         }
+        setTimeout(()=>{this.serverErrorMessages=""}, 3000);
       }
     )
   }
@@ -100,7 +101,10 @@ export class LoginComponent implements OnInit {
         this.activeModal.close();
       },
       err => {
+        console.log("err");
+        
         this.serverErrorMessages = err.error.message;
+        setTimeout(()=>{this.serverErrorMessages=""}, 3000);
       }
     )
   }
