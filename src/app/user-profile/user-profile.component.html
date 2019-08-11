@@ -1,3 +1,38 @@
-<h1>{{userDetails.name}}</h1>
+<!-- <h1>{{userDetails.name}}</h1>
 <h2>{{userDetails.email}}</h2>
-<button (click)="logout()">Log Out</button>
+<button (click)="logout()">Log Out</button> -->
+<app-navbar></app-navbar>
+<div class="profile-content">
+  <div class="container">
+    <div class="row">
+      <div class="col col-md-4">
+        <div class="section">
+          <div class="row">
+            <div class="col col-md-3">
+              <i class="fa fa-user-circle profile-card-icon"></i>
+            </div>
+            <div class="col col-sm-9 profile-card-detail">
+              <div class="hello-text">Hello,</div>
+              <div class="username">{{userDetails.name}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="section-left-sidebar">
+          <div *ngFor="let header of menuHeaders" class="list-group">
+            <button type="button" class="list-group-item list-group-item-action active disabled">
+                {{header}}
+            </button>
+            
+            <button *ngFor="let option of menuOptions[header]" type="button"
+              class="list-group-item list-group-item-action" [ngClass]="selectedOption === option ? 'selected-option': ''" (click)="handleOptionClick($event.target.value)" [value]="option">{{option}}</button>
+          </div>
+        </div>
+      </div>
+      <div class="col col-md-8 section">
+        <app-personal-info *ngIf="selectedOption === 'Profile Information'"></app-personal-info>
+        <app-manage-address *ngIf="selectedOption === 'Manage Addresses'"></app-manage-address>
+        <app-saved-cards *ngIf="selectedOption === 'Saved Cards'"></app-saved-cards>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

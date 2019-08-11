@@ -1,3 +1,4 @@
+import { ProfileMenuOption } from './../shared/helper.enum';
 import { UserService } from './../shared/user.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -10,13 +11,20 @@ import { Component, OnInit } from '@angular/core';
 export class UserProfileComponent implements OnInit {
 
   userDetails = {name: "", email: ""};
+  selectedOption = ProfileMenuOption.profileInformation;
+  menuHeaders: ProfileMenuOption[] = [ProfileMenuOption.accountSettings, ProfileMenuOption.payments,
+  ProfileMenuOption.myStuff]
+  menuOptions = {
+    "ACCOUNT SETTINGS": [ProfileMenuOption.profileInformation, ProfileMenuOption.manageAddresses, 
+      ProfileMenuOption.panCardInfo,ProfileMenuOption.logout],
+      "PAYMENTS": [ProfileMenuOption.phonePeWallet, ProfileMenuOption.giftCards, 
+        ProfileMenuOption.payLater, ProfileMenuOption.savedCards],
+      "MY STUFF": [ProfileMenuOption.myOrders, ProfileMenuOption.myRewards, 
+        ProfileMenuOption.myReviews, ProfileMenuOption.allNotifications, 
+        ProfileMenuOption.myWishlist]
+  }
 
   constructor(private userService: UserService, private router: Router) { }
-
-  logout() {
-    this.userService.deleteToken();
-    this.router.navigate(['/']);
-  }
 
   ngOnInit() {
     this.userService.getUserProfile().subscribe(
@@ -29,4 +37,16 @@ export class UserProfileComponent implements OnInit {
     )
   }
 
+  logout() {
+    this.userService.deleteToken();
+    this.router.navigate(['/']);
+  }
+
+  handleOptionClick(value) {
+    this.selectedOption = value;
+
+    if (this.selectedOption === ProfileMenuOption.logout) {
+      this.logout();
+    }
+  }
 }

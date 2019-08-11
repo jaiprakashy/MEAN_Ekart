@@ -90,7 +90,6 @@ export class LoginComponent implements OnInit {
       res => {
         console.log(res);
         this.userService.setToken(res['token']);
-        // this.router.navigateByUrl('/user-profile');
         this.resetLoginSubmit();
         this.userService.getUserProfile().subscribe(
           res => {

@@ -17,6 +17,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './auth/auth.guard';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { LiveOffersComponent } from './live-offers/live-offers.component';
+import { PersonalInfoComponent } from './user-profile/personal-info/personal-info.component';
+import { ManageAddressComponent } from './user-profile/manage-address/manage-address.component';
+import { SavedCardsComponent } from './user-profile/saved-cards/saved-cards.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { LiveOffersComponent } from './live-offers/live-offers.component';
     FooterComponent,
     LoginComponent,
     UserProfileComponent,
-    LiveOffersComponent
+    LiveOffersComponent,
+    PersonalInfoComponent,
+    ManageAddressComponent,
+    SavedCardsComponent
   ],
   imports: [
     BrowserModule,

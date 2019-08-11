@@ -1,0 +1,44 @@
+.profile-content {
+    background-color: rgb(241, 243, 246);
+}
+
+.section {
+    background: white;
+    padding: 8px;
+    margin: 16px 0;
+    box-shadow: 0 0 4px #dadada;
+    border-radius: 2px;
+}
+
+.section-left-sidebar {
+    background: white;
+    padding: 0px;
+    margin: 16px 0;
+    box-shadow: 0 0 4px #dadada;
+    border-radius: 2px;
+}
+
+.profile-card-detail {
+    padding-left: 0;
+}
+
+.hello-text {
+    font-size: 13px;
+}
+
+.username {
+    font-size: 18px; 
+    font-weight: 500;
+}
+
+.profile-card-icon {
+    color:blue; 
+    font-size:48px;
+    margin: 4px 0 4px 4px;
+    padding-right: 2px;
+}
+
+.selected-option, .list-group-item:hover {
+    color: #007bff;
+    background-color: rgb(244, 250, 255);
+}
