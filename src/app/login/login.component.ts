@@ -53,7 +53,8 @@ export class LoginComponent implements OnInit {
     this.userService.postUser(newUser).subscribe(
       res => {
         console.log(res);
-        this.resetRegisterSubmit()
+        this.login({email: newUser.email, password: newUser.password})
+        this.resetRegisterSubmit();
       },
       err => {
         if (err.status === 422 ) {
@@ -81,12 +82,23 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.userService.login(this.loginForm.value).subscribe(
+    this.login(this.loginForm.value);
+  }
+
+  login(loginFormValue: Object) {
+    this.userService.login(loginFormValue).subscribe(
       res => {
         console.log(res);
         this.userService.setToken(res['token']);
-        this.router.navigateByUrl('/user-profile');
-        this.resetLoginSubmit()
+        // this.router.navigateByUrl('/user-profile');
+        this.resetLoginSubmit();
+        this.userService.getUserProfile().subscribe(
+          res => {
+            this.userService.loggedInUsername = res['user'].name;
+          },
+          err => {}
+        )
+        this.activeModal.close();
       },
       err => {
         this.serverErrorMessages = err.error.message;
@@ -103,9 +115,6 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router, public activeModal: NgbActiveModal) { }
 
   ngOnInit() {
-      if (this.userService.isLoggedIn()) {
-        this.router.navigateByUrl('/user-profile');
-      }
       this.registerForm = this.formBuilder.group({
           name: [null, [Validators.required, CustomValidators.patternValidator(/^([^0-9]*)$/, { hasNoNumber: true }),
             CustomValidators.patternValidator(/^[_A-z0-9]*((-|\s)*[_A-z0-9])*$/,

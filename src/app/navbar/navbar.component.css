@@ -64,3 +64,10 @@
       padding: 8px;
   }
   
+  .nav-item-count {
+    background: rgb(239, 239, 239);
+    color: rgb(141, 141, 141);
+    padding: 0px 8px;
+    border-radius: 4px; 
+    font-size: 14px;
+  }

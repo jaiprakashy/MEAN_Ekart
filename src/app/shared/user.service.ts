@@ -9,11 +9,7 @@ import { environment } from './../../environments/environment';
 })
 export class UserService {
 
-  newUser: User = {
-    name: '',
-    email: '',
-    password: ''
-  }
+  loggedInUsername: String = "";
 
   noAuthHeader = { headers: new HttpHeaders({'noauth': 'true'})};
 

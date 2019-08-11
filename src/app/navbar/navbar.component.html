@@ -20,24 +20,43 @@
             </div>
           </form>
           <ul class="navbar-nav my-2 mr-5 pr-5">
-            <li class="nav-item active">
+            <li *ngIf="!userService.isLoggedIn()" class="nav-item active">
               <a class="nav-link" (click)="loadLoginPage()">Login & Signup<span class="sr-only">(current)</span></a>
             </li>
+            <li *ngIf="userService.isLoggedIn()" class="nav-item dropdown active">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  {{this.userService.loggedInUsername}}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item text-primary" href="#"><i class="fa fa-user"></i> My Profile</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item text-primary" href="#"><i class="fa fa-shopping-basket"></i> Orders</a>
+                  <div class="dropdown-divider"></div>
+                  <div>
+                      <a class="dropdown-item text-primary" href="#"><i class="fa fa-heart"></i> Wishlist <span class="float-right nav-item-count">6</span></a>
+                  </div>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item text-primary" href="#"><i class="fa fa-bell"></i> Notifications</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item text-primary" routerLink="/" (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a>
+                </div>
+              </li>
             <li class="nav-item dropdown active">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 More
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#"><i class="fa fa-bell"></i> Notification Preferences</a>
+                <a class="dropdown-item text-primary" href="#"><i class="fa fa-bell"></i> Notification Preferences</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#"><i class="fa fa-briefcase"></i> Sell on Meankart</a>
+                <a class="dropdown-item text-primary" href="#"><i class="fa fa-briefcase"></i> Sell on Meankart</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#"><i class="fa fa-question"></i> 24/7 Customer Care</a>
+                <a class="dropdown-item text-primary" href="#"><i class="fa fa-question"></i> 24/7 Customer Care</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#"><i class="fa fa-line-chart"></i> Advertise</a>
+                <a class="dropdown-item text-primary" href="#"><i class="fa fa-line-chart"></i> Advertise</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#"><i class="fa fa-download"></i> Download App</a>
+                <a class="dropdown-item text-primary" href="#"><i class="fa fa-download"></i> Download App</a>
               </div>
             </li>
             <li class="nav-item active">
