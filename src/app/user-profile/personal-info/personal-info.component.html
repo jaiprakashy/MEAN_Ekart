@@ -34,6 +34,30 @@
       </div>
     </form>
 
+    <!-- <form [formGroup]="passwordUpdateForm" (ngSubmit)="passwordFormSubmit(passwordUpdateForm)">
+        <span class="title">Change Password</span>
+        <span class="edit-link text-primary" (click)="togglePasswordFormStatus(passwordUpdateForm)">{{passwordUpdateForm.enabled? 'Cancel' : 'Edit'}}</span>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <input type="password" class="form-control" placeholder="Old Password" formControlName="oldPassword" 
+            [ngClass]="{ 'is-invalid': (!puf.oldPassword.untouched) && puf.oldPassword.errors }">
+            <div *ngIf="puf.oldPassword.errors" class="invalid-feedback">
+                <div *ngIf="puf.oldPassword.errors.required">Old Password is required</div>
+            </div>
+          </div>
+          <div class="form-group col-md-4">
+              <input type="password" class="form-control" placeholder="New Password" formControlName="newPassword" 
+              [ngClass]="{ 'is-invalid': (!puf.newPassword.untouched) && puf.newPassword.errors }">
+              <div *ngIf="puf.newPassword.errors" class="invalid-feedback">
+                  <div *ngIf="puf.newPassword.errors.required">New Password is required</div>
+              </div>
+            </div>
+          <div class="form-group col-md-4">
+            <button type="submit" class="btn btn-primary" *ngIf="passwordUpdateForm.enabled">Save</button>
+          </div>
+        </div>
+      </form> -->
+
     <div class="text-danger" *ngIf="serverErrorMessages!==''">{{this.serverErrorMessages}}</div>
     <div class="text-success" *ngIf="serverSuccessMessage!==''">{{this.serverSuccessMessage}}</div>
 </div>

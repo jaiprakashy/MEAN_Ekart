@@ -64,11 +64,11 @@ export class SavedCardsComponent implements OnInit {
     let date = new Date()
     console.log(this.cf.expiryYear.value, this.cf.expiryMonth.value);
     console.log(date.getFullYear(), date.getMonth());
-    if (this.cf.expiryYear.value === date.getFullYear && this.cf.expiryMonth.value <= date.getMonth()) {
-      console.log("Fail");
-      this.errorMessageHandler('Your Card is expired')
+    console.log(this.cf.expiryYear.value == date.getFullYear());
+    console.log(this.cf.expiryMonth.value < date.getMonth())
+    if (this.cf.expiryYear.value == date.getFullYear() && this.cf.expiryMonth.value <= date.getMonth()) {
+      this.errorMessageHandler("This Card has Expired")
     } else {
-      console.log("Pass1");
       if (form.valid) {
         this.isFormActive = false
         this.collapseKey = "#collapseExample";
