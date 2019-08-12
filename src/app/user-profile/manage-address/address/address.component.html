@@ -1,6 +1,6 @@
 <div class="container">
   <form [formGroup]="addressForm">
-    <label for="EDIT ADDRESS"></label>
+    <label class="title">{{address._id ? 'EDIT ADDRESS' : 'ADD A NEW ADDRESS'}}</label>
     <div class="form-row">
       <input type="hidden" formControlName="_id" class="form-control" placeholder="id">
     </div>
