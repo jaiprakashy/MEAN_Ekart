@@ -44,16 +44,7 @@ export class AddressComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.addressForm.controls['_id'].setValue(this.address._id);
-    this.addressForm.controls['name'].setValue(this.address.name);
-    this.addressForm.controls['mobile'].setValue(this.address.mobile);
-    this.addressForm.controls['pincode'].setValue(this.address.pincode);
-    this.addressForm.controls['locality'].setValue(this.address.locality);
-    this.addressForm.controls['area'].setValue(this.address.area);
-    this.addressForm.controls['city'].setValue(this.address.city);
-    this.addressForm.controls['state'].setValue(this.address.state);
-    this.addressForm.controls['landmark'].setValue(this.address.landmark);
-    this.addressForm.controls['alternateMobile'].setValue(this.address.alternateMobile);
+    this.restoreFormData()
   }
 
   cancelForm(form: FormGroup) {
@@ -85,7 +76,21 @@ export class AddressComponent implements OnInit {
 
   resetForm(form: FormGroup) {
     form.reset();
+    this.restoreFormData();
     this.isSubmitted = false;
+  }
+
+  restoreFormData() {
+    this.addressForm.controls['_id'].setValue(this.address._id);
+    this.addressForm.controls['name'].setValue(this.address.name);
+    this.addressForm.controls['mobile'].setValue(this.address.mobile);
+    this.addressForm.controls['pincode'].setValue(this.address.pincode);
+    this.addressForm.controls['locality'].setValue(this.address.locality);
+    this.addressForm.controls['area'].setValue(this.address.area);
+    this.addressForm.controls['city'].setValue(this.address.city);
+    this.addressForm.controls['state'].setValue(this.address.state);
+    this.addressForm.controls['landmark'].setValue(this.address.landmark);
+    this.addressForm.controls['alternateMobile'].setValue(this.address.alternateMobile);
   }
 
   collapseForm() {

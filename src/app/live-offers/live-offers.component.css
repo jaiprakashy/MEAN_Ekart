@@ -1,3 +1,7 @@
 .carousel {
     padding: 8px;
 }
+
+.carousel-control-prev, .carousel-control-prev {
+    z-index: 0;
+}

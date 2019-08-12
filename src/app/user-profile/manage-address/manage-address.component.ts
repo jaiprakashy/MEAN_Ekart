@@ -12,7 +12,7 @@ export class ManageAddressComponent implements OnInit {
   newAddress = new Address();
   allAddresses: Address[];
   expandedIndex: number
-  severErrorMessages: string;
+  serverErrorMessages: string;
   serverSuccessMessages: string;
 
   constructor(private addressService: AddressService) { }
@@ -28,10 +28,7 @@ export class ManageAddressComponent implements OnInit {
         this.allAddresses = res['addresses'];
       },
       err => {
-        this.severErrorMessages = err.error.message;
-        setTimeout(() => {
-          this.severErrorMessages = ""
-        }, 3000);
+        this.serverErrorHandler(err)
       }
     )
   }
@@ -41,24 +38,73 @@ export class ManageAddressComponent implements OnInit {
     this.expandedIndex = -2;
     if (formData) {
       if (formData._id) {
-
+        this.updateAddress(formData);
       } else {
-        this.addressService.postAddress(formData).subscribe(
-          res => {
-            if (res['address']) {
-              this.allAddresses.push(res['address']);
-            }
-            console.log(this.allAddresses);
-          },
-          err => {
-            this.severErrorMessages = err.error.message;
-            setTimeout(() => {
-              this.severErrorMessages = ""
-            }, 3000);
-          }
-        )
+        this.postAddress(formData);
       }
     }
   }
 
+  postAddress(formData) {
+    this.addressService.postAddress(formData).subscribe(
+      res => {
+        if (res['address']) {
+          this.allAddresses.push(res['address']);
+        }
+        console.log("Update")
+        this.serverSuccessHandler(res['message'])
+      },
+      err => {
+        this.serverErrorHandler(err)
+      }
+    )
+  }
+
+  updateAddress(formData) {
+    this.addressService.patchAddress(formData).subscribe(
+      res => {
+        let updatedAddress = res['address'];
+        for(var i=0; i<this.allAddresses.length; i++) {
+          if (updatedAddress._id === this.allAddresses[i]._id) {
+            this.allAddresses[i] = updatedAddress
+            break
+          }
+        }
+        this.serverSuccessHandler(res['message'])
+      },
+      err => {
+        this.serverErrorHandler(err)
+      }
+    )
+  }
+
+  deleteAddress(id: string) {
+    if (confirm('Are you sure you want to delete this address')) {
+      this.addressService.deleteAddress(id).subscribe(
+        res => { 
+          this.allAddresses = this.allAddresses.filter((address) => {return address._id != id}) 
+          this.serverSuccessHandler(res['message'])
+        },
+        err => { 
+          this.serverErrorHandler(err)
+         }
+      )
+    }
+  }
+
+  serverErrorHandler(err) {
+    this.serverErrorMessages = err.error.message;
+    setTimeout(() => {
+      this.serverErrorMessages = ""
+    }, 3000);
+  }
+
+  serverSuccessHandler(message) {
+    console.log(message);
+    
+    this.serverSuccessMessages = message;
+    setTimeout(() => {
+      this.serverSuccessMessages = ""
+    }, 3000);
+  }
 }

@@ -1,11 +1,45 @@
 <div class="container">
   <span class="title">Manage Addresses</span>
 
-  <div class="address-container" data-toggle="collapse" *ngIf="expandedIndex !== -1" (click)="expandedIndex = -1;" href="#addAddress" role="button">
-    <div class="add-address"><span class="plus">+</span>ADD A NEW ADDRESS</div>
+  <div class="new-address">
+    <div class="address-container" data-toggle="collapse" *ngIf="expandedIndex !== -1" (click)="expandedIndex = -1;"
+      href="#addAddress" role="button">
+      <div class="add-address"><span class="plus">+</span>ADD A NEW ADDRESS</div>
+    </div>
+
+    <div *ngIf="expandedIndex === -1" class="collapse" id="addAddress">
+      <app-address [address]="newAddress" collapseKey="addAddress" dataTarget="" (collapse)="saveAddress($event)">
+      </app-address>
+    </div>
   </div>
 
-  <div class="collapse" id="addAddress">
-    <app-address [address]="newAddress" collapseKey="addAddress" dataTarget="" (collapse)="saveAddress($event)"></app-address>
+  <div class="saved-addresses">
+    <div *ngFor="let address of allAddresses; let i = index;" class="address">
+      <div class="address-container" *ngIf="expandedIndex !== i">
+        <div class="row">
+          <div class="col col-md-11">
+            <div class="address-line"> <span>{{address.name}}</span> <span>{{address.mobile}}</span></div>
+            <div class="address-line">{{address.area}}, {{address.city}}, {{address.state}} -
+              <span>{{address.pincode}}</span></div>
+          </div>
+          <div class="col col-md-1 dropdown">
+            <div class="menu dropbtn"><i class="fa fa-2x fa-ellipsis-v"></i></div>
+            <div class="dropdown-content">
+              <a data-toggle="collapse" (click)="expandedIndex = i;" href="#addAddress{{i}}">Edit</a>
+              <a (click)="deleteAddress(address._id)">Delete</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="expandedIndex === i" class="collapse" id="addAddress{{i}}">
+        <app-address [address]="address" collapseKey="addAddress{{i}}" dataTarget="" (collapse)="saveAddress($event)">
+        </app-address>
+      </div>
+    </div>
   </div>
+
+  <div class="text-danger" *ngIf="serverErrorMessages!==''">{{this.serverErrorMessages}}</div>
+  <div class="text-success" *ngIf="serverSuccessMessages!==''">{{this.serverSuccessMessages}}</div>
+
 </div>
