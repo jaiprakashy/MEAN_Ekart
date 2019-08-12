@@ -1,3 +1,4 @@
+import { AddressService } from './shared/address.service';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { UserService } from './shared/user.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -49,7 +50,7 @@ import { AddressComponent } from './user-profile/manage-address/address/address.
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  }, NgbActiveModal, UserService, AuthGuard],
+  }, NgbActiveModal, UserService, AuthGuard, AddressService],
   bootstrap: [AppComponent],
   entryComponents: [LoginComponent]
 })

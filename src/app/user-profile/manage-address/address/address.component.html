@@ -2,6 +2,9 @@
   <form [formGroup]="addressForm">
     <label for="EDIT ADDRESS"></label>
     <div class="form-row">
+      <input type="hidden" formControlName="_id" class="form-control" placeholder="id">
+    </div>
+    <div class="form-row">
       <div class="form-group col-md-5">
         <input type="text" formControlName="name" class="form-control" placeholder="Name"
           [ngClass]="{ 'is-invalid': (!af.name.untouched || isSubmitted) && af.name.errors }">
@@ -13,7 +16,8 @@
       </div>
       <div class="form-group col-md-5">
         <input type="text" maxlength="10" formControlName="mobile" class="form-control"
-          placeholder="10 digit mobile number" [ngClass]="{ 'is-invalid': (!af.mobile.untouched || isSubmitted) && af.mobile.errors }">
+          placeholder="10 digit mobile number"
+          [ngClass]="{ 'is-invalid': (!af.mobile.untouched || isSubmitted) && af.mobile.errors }">
         <div *ngIf="af.mobile.errors" class="invalid-feedback">
           <div *ngIf="af.mobile.errors.required">Mobile number is required</div>
           <div *ngIf="af.mobile.errors.hasOnlyDigits">Mobile number must have 10 digits</div>
@@ -39,10 +43,12 @@
     </div>
     <div class="form-row">
       <div class="form-group col-md-10">
-          <textarea formControlName="area" class="form-control" cols="10" rows="4" tabindex="5" placeholder="Area(Area and Street)" [ngClass]="{ 'is-invalid': (!af.area.untouched || isSubmitted) && af.area.errors }"></textarea>
-          <div *ngIf="af.area.errors" class="invalid-feedback">
-                <div *ngIf="af.area.errors.required">Area is required</div>
-              </div>
+        <textarea formControlName="area" class="form-control" cols="10" rows="4" tabindex="5"
+          placeholder="Area(Area and Street)"
+          [ngClass]="{ 'is-invalid': (!af.area.untouched || isSubmitted) && af.area.errors }"></textarea>
+        <div *ngIf="af.area.errors" class="invalid-feedback">
+          <div *ngIf="af.area.errors.required">Area is required</div>
+        </div>
       </div>
     </div>
     <div class="form-row">
@@ -55,14 +61,15 @@
         </div>
       </div>
       <div class="form-group col-md-5">
-        <select formControlName="state" class="form-control" [ngClass]="{ 'is-invalid': (!af.state.untouched || isSubmitted) && af.state.errors }">
+        <select formControlName="state" class="form-control"
+          [ngClass]="{ 'is-invalid': (!af.state.untouched || isSubmitted) && af.state.errors }">
           <option value="Select State" disabled>Select State</option>
           <option *ngFor="let state of states" [value]="state">{{state}}</option>
 
         </select>
         <div *ngIf="af.state.errors" class="invalid-feedback">
-            <div *ngIf="af.state.errors.required">State is required</div>
-          </div>
+          <div *ngIf="af.state.errors.required">State is required</div>
+        </div>
       </div>
     </div>
     <div class="form-row">
@@ -82,8 +89,10 @@
     </div>
     <div class="form-row">
       <div class="form-group col-md-10">
-        <button class="btn btn-primary" (click)="submitForm(addressForm)" type="submit" data-toggle="collapse" attr.data-target="#{{dataTargetKey}}">Save</button>
-        <button class="btn btn-link" (click)="cancelForm(addressForm)" type="button" data-toggle="collapse" attr.data-target="#{{dataTargetKey}}">Cancel</button>
+        <button class="btn btn-primary" (click)="submitForm(addressForm)" type="submit" data-toggle="collapse"
+          attr.data-target="#{{dataTargetKey}}">Save</button>
+        <button class="btn btn-link" (click)="cancelForm(addressForm)" type="button" data-toggle="collapse"
+          attr.data-target="#{{dataTargetKey}}">Cancel</button>
       </div>
     </div>
   </form>

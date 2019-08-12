@@ -15,6 +15,7 @@ export class AddressComponent implements OnInit {
   @Output() collapse = new EventEmitter();
 
   addressForm: FormGroup = new FormGroup({
+    _id: new FormControl(null),
     name: new FormControl(null, [Validators.required, CustomValidators.patternValidator(/^([^0-9]*)$/, { hasNoNumber: true }),
     CustomValidators.patternValidator(/^[_A-z0-9]*((-|\s)*[_A-z0-9])*$/,
       { 
@@ -43,6 +44,7 @@ export class AddressComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.addressForm.controls['_id'].setValue(this.address._id);
     this.addressForm.controls['name'].setValue(this.address.name);
     this.addressForm.controls['mobile'].setValue(this.address.mobile);
     this.addressForm.controls['pincode'].setValue(this.address.pincode);
