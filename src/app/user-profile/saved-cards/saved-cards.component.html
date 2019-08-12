@@ -1,1 +1,100 @@
-<p>saved-cards works!</p>
+<div class="container">
+  <span class="title">Manage Saved Cards</span>
+  <div class="new-card">
+    <div *ngIf="!isFormActive" class="card-box" data-toggle="collapse" href="#collapseExample" role="button"
+      aria-expanded="false" aria-controls="collapseExample" (click)="isFormActive=true">
+      <div class="add-card"><span class="plus">+</span>ADD A NEW CARD</div>
+    </div>
+    <div class="card-box" class="collapse" id="collapseExample">
+      <form [formGroup]="cardForm">
+        <label class="form-title">ADD A NEW CARD</label>
+        <div class="form-row">
+          <div class="form-group col-md-5">
+            <input type="text" maxlength="16" formControlName="cardNumber" class="form-control"
+              placeholder="Enter Card Number"
+              [ngClass]="{ 'is-invalid': (!cf.cardNumber.untouched || isSubmitted) && cf.cardNumber.errors }">
+            <div *ngIf="cf.cardNumber.errors" class="invalid-feedback">
+              <div *ngIf="cf.cardNumber.errors.required">Card Number is required</div>
+              <div *ngIf="cf.cardNumber.errors.hasOnlyNumber">Not a valid card number</div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <select class="form-control" formControlName="expiryMonth"
+                [ngClass]="{ 'is-invalid': (!cf.expiryMonth.untouched || isSubmitted) && cf.expiryMonth.errors }">
+                <option selected disabled>MM</option>
+                <option *ngFor="let month of getMonths()" value="{{month}}">{{month < 10 ? '0'+month : month}}</option>
+              </select>
+              <div *ngIf="cf.expiryMonth.errors" class="invalid-feedback">
+                <div *ngIf="cf.expiryMonth.errors.required">Month is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <select class="form-control" formControlName="expiryYear"
+                [ngClass]="{ 'is-invalid': (!cf.expiryYear.untouched || isSubmitted) && cf.expiryYear.errors }">
+                <option selected disabled>YY</option>
+                <option *ngFor="let year of getYears()" value="{{year}}">{{year}}</option>
+              </select>
+              <div *ngIf="cf.expiryYear.errors" class="invalid-feedback">
+                <div *ngIf="cf.expiryYear.errors.required">Year is required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-5">
+            <input type="text" formControlName="name" class="form-control" placeholder="Name on Card"
+              [ngClass]="{ 'is-invalid': (!cf.name.untouched || isSubmitted) && cf.name.errors }">
+            <div *ngIf="cf.name.errors" class="invalid-feedback">
+              <div *ngIf="cf.name.errors.required">Card Name is required</div>
+              <div *ngIf="cf.name.errors.hasNoNumber || cf.name.errors.hasNoSpecialCharacters">Card Name must
+                not contain number
+                or special character</div>
+            </div>
+          </div>
+          <div class="form-group col-md-5">
+            <input type="text" formControlName="alias" class="form-control"
+              placeholder="Name this Card for future use"
+              [ngClass]="{ 'is-invalid': (!cf.alias.untouched || isSubmitted) && cf.alias.errors }">
+            <div *ngIf="cf.alias.errors" class="invalid-feedback">
+              <div *ngIf="cf.alias.errors.required">Card Alias is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <!-- <div class="form-group"> -->
+          <div class="col-md-3">
+            <button class="btn btn-primary" (click)="submitForm(cardForm)" type="submit" data-toggle="collapse"
+              [attr.href]="collapseKey" role="button" aria-expanded="false"
+              aria-controls="collapseExample">Save</button>
+          </div>
+          <div class="col-md-3">
+            <button class="btn btn-link" (click)="cancelForm(cardForm)" data-toggle="collapse" [attr.href]="collapseKey"
+              role="button" aria-expanded="false" aria-controls="collapseExample">Cancel</button>
+          </div>
+        </div>
+        <!-- </div> -->
+      </form>
+    </div>
+    <div class="text-danger" *ngIf="errorMessage!==''">{{this.errorMessage}}</div>
+    <div class="text-success" *ngIf="successMessage!==''">{{this.successMessage}}</div>
+  </div>
+  <div class="saved-cards">
+    <div *ngFor="let card of cards">
+        <div class="card-box">
+            <div class="row">
+              <div class="col col-md-11">
+                <div class="card-line">{{card.alias}}</div>
+                <div class="card-line">{{card.cardNumber}}</div>
+              </div>
+              <div class="col-md-1" (click)="delete(card._id)">
+                  <div class="menu"><i class="fa fa-trash"></i></div>
+              </div>
+          </div>
+        </div>
+    </div>
+    
+  </div>
+</div>

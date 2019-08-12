@@ -1,0 +1,75 @@
+.title {
+    font-size: 18px;
+    font-weight: 500;
+    display: block;
+    padding-bottom: 20px;
+}
+
+.card-box {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    padding: 8px 16px;
+}
+
+.add-card {
+    font-size: 14px;
+    color: #007bff;
+    font-weight: 500;
+    padding: 16px 0;
+    cursor: pointer;
+}
+
+.plus {
+    font-size: 18px;
+    margin: 0 16px;
+}
+
+.form-title {
+    font-size: 14px;
+    color: #007bff;
+    font-weight: 500;
+    padding: 8px 0;
+    cursor: pointer;
+}
+
+.form-container {
+    background-color: rgb(244, 250, 255);
+}
+
+.form-control, .btn {
+    font-size: 0.8rem;
+}
+
+.btn {
+    padding: 10px 20px;
+    width: 200px;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.btn-link:hover {
+    text-decoration: none;
+}
+
+.col-md-1 {
+    padding-top: 32px;
+    cursor: pointer;
+}
+
+.saved-cards {
+    margin-top: 30px;
+}
+
+.card-line {
+    margin: 12px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* .card-container:first-child {
+    font-size: 16px;
+}
+
+.address-container:last-child {
+    font-size: 14px;
+} */
