@@ -1,0 +1,18 @@
+.container {
+    background-color: #f5faff;
+}
+
+.form-control, .btn {
+    font-size: 0.8rem;
+}
+
+.btn {
+    padding: 10px 20px;
+    width: 200px;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.btn-link:hover {
+    text-decoration: none;
+}

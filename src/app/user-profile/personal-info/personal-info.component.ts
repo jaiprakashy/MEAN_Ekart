@@ -1,7 +1,6 @@
 import { UserService } from './../../shared/user.service';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { format } from 'util';
 
 @Component({
   selector: 'app-personal-info',

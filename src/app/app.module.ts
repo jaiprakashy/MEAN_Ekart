@@ -20,6 +20,7 @@ import { LiveOffersComponent } from './live-offers/live-offers.component';
 import { PersonalInfoComponent } from './user-profile/personal-info/personal-info.component';
 import { ManageAddressComponent } from './user-profile/manage-address/manage-address.component';
 import { SavedCardsComponent } from './user-profile/saved-cards/saved-cards.component';
+import { AddressComponent } from './user-profile/manage-address/address/address.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { SavedCardsComponent } from './user-profile/saved-cards/saved-cards.comp
     LiveOffersComponent,
     PersonalInfoComponent,
     ManageAddressComponent,
-    SavedCardsComponent
+    SavedCardsComponent,
+    AddressComponent
   ],
   imports: [
     BrowserModule,

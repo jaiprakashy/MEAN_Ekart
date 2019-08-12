@@ -1,1 +1,11 @@
-<p>manage-address works!</p>
+<div class="container">
+  <span class="title">Manage Addresses</span>
+
+  <div class="address-container" data-toggle="collapse" *ngIf="expandedIndex !== -1" (click)="expandedIndex = -1;" href="#addAddress" role="button">
+    <div class="add-address"><span class="plus">+</span>ADD A NEW ADDRESS</div>
+  </div>
+
+  <div class="collapse" id="addAddress">
+    <app-address [address]="newAddress" collapseKey="addAddress" dataTarget="" (collapse)="saveAddress($event)"></app-address>
+  </div>
+</div>

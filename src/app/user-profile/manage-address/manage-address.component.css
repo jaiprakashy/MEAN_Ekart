@@ -1,0 +1,25 @@
+.title {
+    font-size: 18px;
+    font-weight: 500;
+    display: block;
+    padding-bottom: 20px;
+}
+
+.address-container {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /* margin-bottom: 30px; */
+}
+
+.add-address {
+    font-size: 14px;
+    color: #007bff;
+    font-weight: 500;
+    padding: 16px 0;
+    cursor: pointer;
+}
+
+.plus {
+    font-size: 18px;
+    margin: 0 16px;
+}
